@@ -49,7 +49,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // Only ADMINs can access user management endpoints
-                        .requestMatchers("/api/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/manage-users/**").hasRole("ADMIN")
+
 
                         // All other requests require authentication
                         .anyRequest().authenticated()
