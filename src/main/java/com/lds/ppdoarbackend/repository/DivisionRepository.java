@@ -1,4 +1,7 @@
 package com.lds.ppdoarbackend.repository;
 
-public class DivisionRepository {
+import com.lds.ppdoarbackend.model.Division;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DivisionRepository extends JpaRepository<Division, String> {
 }
