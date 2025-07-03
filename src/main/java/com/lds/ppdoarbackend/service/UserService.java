@@ -3,6 +3,7 @@ package com.lds.ppdoarbackend.service;
 
 import com.lds.ppdoarbackend.dto.UserDto;
 import com.lds.ppdoarbackend.model.User;
+import com.lds.ppdoarbackend.repository.DivisionRepository;
 import com.lds.ppdoarbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DivisionRepository divisionRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -40,6 +44,9 @@ public class UserService {
         user.setRole(userDto.getRole());
         user.setCreatedAt(new Date());
         user.setUpdatedAt(new Date());
+        if (userDto.getDivisionId() != null) {
+            user.setDivision(divisionRepository.findById(userDto.getDivisionId()).orElse(null));
+        }
         return userRepository.save(user);
     }
 
@@ -55,6 +62,9 @@ public class UserService {
         }
         user.setRole(userDto.getRole());
         user.setUpdatedAt(new Date());
+        if (userDto.getDivisionId() != null) {
+            user.setDivision(divisionRepository.findById(userDto.getDivisionId()).orElse(null));
+        }
         return userRepository.save(user);
     }
 

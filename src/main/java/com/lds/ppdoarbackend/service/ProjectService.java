@@ -1,3 +1,4 @@
+// src/main/java/com/lds/ppdoarbackend/service/ProjectService.java
 package com.lds.ppdoarbackend.service;
 
 import com.lds.ppdoarbackend.dto.ProjectDto;
@@ -18,11 +19,16 @@ public class ProjectService {
     @Autowired
     private DivisionRepository divisionRepository;
 
-    public List<Project> getAllProjects(String divisionCode) {
-        if (divisionCode != null) {
+    public List<Project> getAllProjects(String divisionCode, String status) { // Add status parameter
+        if (divisionCode != null && status != null) {
+            return projectRepository.findByDivisionCodeAndStatus(divisionCode, status);
+        } else if (divisionCode != null) {
             return projectRepository.findByDivisionCode(divisionCode);
+        } else if (status != null) {
+            return projectRepository.findByStatus(status);
+        } else {
+            return projectRepository.findAll();
         }
-        return projectRepository.findAll();
     }
 
     public Project getProjectById(String id) {

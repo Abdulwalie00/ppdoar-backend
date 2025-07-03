@@ -15,4 +15,5 @@ public class UserDto {
     private String role;
     private Date createdAt;
     private Date updatedAt;
+    private String divisionId;
 }

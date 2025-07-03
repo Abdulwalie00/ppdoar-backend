@@ -17,8 +17,9 @@ public class ProjectController {
     private ProjectService projectService;
 
     @GetMapping
-    public List<Project> getAllProjects(@RequestParam(required = false) String divisionCode) {
-        return projectService.getAllProjects(divisionCode);
+    public List<Project> getAllProjects(@RequestParam(required = false) String divisionCode,
+                                        @RequestParam(required = false) String status) { // Add status parameter
+        return projectService.getAllProjects(divisionCode, status);
     }
 
     @GetMapping("/{id}")
