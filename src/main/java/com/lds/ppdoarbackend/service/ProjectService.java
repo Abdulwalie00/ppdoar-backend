@@ -42,8 +42,11 @@ public class ProjectService {
         project.setDescription(projectDto.getDescription());
         project.setLocation(projectDto.getLocation());
         project.setStartDate(projectDto.getStartDate());
+        project.setImplementationSchedule(projectDto.getImplementationSchedule());
+        project.setDateOfAccomplishment(projectDto.getDateOfAccomplishment());
         project.setEndDate(projectDto.getEndDate());
         project.setBudget(projectDto.getBudget());
+        project.setPercentCompletion(projectDto.getPercentCompletion());
         project.setFundSource(projectDto.getFundSource());
         project.setDivision(divisionRepository.findById(projectDto.getDivisionId()).orElse(null));
         project.setStatus(projectDto.getStatus());
@@ -61,10 +64,15 @@ public class ProjectService {
         project.setLocation(projectDto.getLocation());
         project.setStartDate(projectDto.getStartDate());
         project.setEndDate(projectDto.getEndDate());
+        project.setImplementationSchedule(projectDto.getImplementationSchedule());
+        project.setDateOfAccomplishment(projectDto.getDateOfAccomplishment());
         project.setBudget(projectDto.getBudget());
+        project.setPercentCompletion(projectDto.getPercentCompletion());
         project.setFundSource(projectDto.getFundSource());
+        project.setTargetParticipant(projectDto.getTargetParticipant());
         project.setDivision(divisionRepository.findById(projectDto.getDivisionId()).orElse(null));
         project.setStatus(projectDto.getStatus());
+        project.setOfficeInCharge(projectDto.getOfficeInCharge());
         project.setImages(projectDto.getImages());
         project.setDateUpdated(new Date());
         return projectRepository.save(project);

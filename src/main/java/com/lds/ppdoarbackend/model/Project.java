@@ -16,10 +16,15 @@ public class Project {
     private String location;
     private Date startDate;
     private Date endDate;
+    private Date implementationSchedule;
+    private Date dateOfAccomplishment;
     private Date dateCreated;
     private Date dateUpdated;
     private Double budget;
+    private Double percentCompletion;
+    private String targetParticipant;
     private String fundSource;
+    private String officeInCharge;
     @ManyToOne
     private Division division;
     @OneToMany(cascade = CascadeType.ALL)
