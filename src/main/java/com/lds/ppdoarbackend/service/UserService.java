@@ -2,6 +2,7 @@ package com.lds.ppdoarbackend.service;
 
 
 import com.lds.ppdoarbackend.dto.UserDto;
+import com.lds.ppdoarbackend.model.Division;
 import com.lds.ppdoarbackend.model.User;
 import com.lds.ppdoarbackend.repository.DivisionRepository;
 import com.lds.ppdoarbackend.repository.UserRepository;
@@ -74,5 +75,9 @@ public class UserService {
 
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Optional<Division> getUserDivision(Long userId) {
+        return userRepository.findById(userId).map(User::getDivision);
     }
 }
