@@ -4,6 +4,7 @@ package com.lds.ppdoarbackend.service;
 import com.lds.ppdoarbackend.dto.ProjectDto;
 import com.lds.ppdoarbackend.model.Project;
 import com.lds.ppdoarbackend.repository.DivisionRepository;
+import com.lds.ppdoarbackend.repository.ProjectCategoryRepository;
 import com.lds.ppdoarbackend.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class ProjectService {
     private ProjectRepository projectRepository;
     @Autowired
     private DivisionRepository divisionRepository;
+    @Autowired
+    private ProjectCategoryRepository projectCategoryRepository;
 
     public List<Project> getAllProjects(String divisionCode, String status) { // Add status parameter
         if (divisionCode != null && status != null) {
@@ -54,6 +57,10 @@ public class ProjectService {
         project.setDateCreated(new Date());
         project.setDateUpdated(new Date());
 
+        if (projectDto.getProjectCategoryId() != null) {
+            project.setProjectCategory(projectCategoryRepository.findById(projectDto.getProjectCategoryId()).orElse(null));
+        }
+
         return projectRepository.save(project);
     }
 
@@ -75,6 +82,11 @@ public class ProjectService {
         project.setOfficeInCharge(projectDto.getOfficeInCharge());
         project.setImages(projectDto.getImages());
         project.setDateUpdated(new Date());
+
+        if (projectDto.getProjectCategoryId() != null) {
+            project.setProjectCategory(projectCategoryRepository.findById(projectDto.getProjectCategoryId()).orElse(null));
+        }
+
         return projectRepository.save(project);
     }
 

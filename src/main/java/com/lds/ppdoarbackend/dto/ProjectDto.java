@@ -20,6 +20,7 @@ public class ProjectDto {
     private String targetParticipant;
     private String fundSource;
     private String divisionId;
+    private String projectCategoryId;
     private String status;
     private String officeInCharge;
     private List<ProjectImage> images;

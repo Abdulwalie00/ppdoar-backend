@@ -42,6 +42,7 @@ public class SecurityConfig {
                         // Allow public auth routes
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/files/**").permitAll()
+                        .requestMatchers("/api/project-categories/**").permitAll()
 
                         // Allow users to access their own profile
                         .requestMatchers(HttpMethod.GET, "/api/users/username/**").authenticated()

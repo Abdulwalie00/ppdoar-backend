@@ -25,8 +25,13 @@ public class Project {
     private String targetParticipant;
     private String fundSource;
     private String officeInCharge;
+
     @ManyToOne
     private Division division;
+
+    @ManyToOne
+    private ProjectCategory projectCategory;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<ProjectImage> images;
     private String status;
