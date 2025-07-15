@@ -106,6 +106,7 @@ public class DataLoader implements CommandLineRunner {
                 sampleProject.setBudget(50000.00);
                 sampleProject.setFundSource("General Fund");
                 sampleProject.setStatus("ongoing");
+                     sampleProject.setTargetParticipant("Participants from " + name);
                 sampleProject.setDivision(division);
                 sampleProject.setDateCreated(new Date());
                 sampleProject.setDateUpdated(new Date());

@@ -49,6 +49,7 @@ public class ProjectService {
         project.setDateOfAccomplishment(projectDto.getDateOfAccomplishment());
         project.setEndDate(projectDto.getEndDate());
         project.setBudget(projectDto.getBudget());
+        project.setTargetParticipant(projectDto.getTargetParticipant());
         project.setPercentCompletion(projectDto.getPercentCompletion());
         project.setFundSource(projectDto.getFundSource());
         project.setDivision(divisionRepository.findById(projectDto.getDivisionId()).orElse(null));
