@@ -23,5 +23,6 @@ public class ProjectDto {
     private String projectCategoryId;
     private String status;
     private String officeInCharge;
+    private String remarks;
     private List<ProjectImage> images;
 }

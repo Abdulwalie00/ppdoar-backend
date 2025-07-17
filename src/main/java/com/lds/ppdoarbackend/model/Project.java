@@ -25,6 +25,7 @@ public class Project {
     private String targetParticipant;
     private String fundSource;
     private String officeInCharge;
+    private String remarks;
 
     @ManyToOne
     private Division division;

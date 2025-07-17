@@ -54,6 +54,8 @@ public class ProjectService {
         project.setFundSource(projectDto.getFundSource());
         project.setDivision(divisionRepository.findById(projectDto.getDivisionId()).orElse(null));
         project.setStatus(projectDto.getStatus());
+        project.setOfficeInCharge(projectDto.getOfficeInCharge());
+        project.setRemarks(projectDto.getRemarks());
         project.setImages(projectDto.getImages());
         project.setDateCreated(new Date());
         project.setDateUpdated(new Date());
@@ -80,6 +82,8 @@ public class ProjectService {
         project.setTargetParticipant(projectDto.getTargetParticipant());
         project.setDivision(divisionRepository.findById(projectDto.getDivisionId()).orElse(null));
         project.setStatus(projectDto.getStatus());
+        project.setOfficeInCharge(projectDto.getOfficeInCharge());
+        project.setRemarks(projectDto.getRemarks());
         project.setOfficeInCharge(projectDto.getOfficeInCharge());
         project.setImages(projectDto.getImages());
         project.setDateUpdated(new Date());
