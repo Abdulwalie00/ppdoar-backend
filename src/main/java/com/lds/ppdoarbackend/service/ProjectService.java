@@ -50,7 +50,11 @@ public class ProjectService {
         project.setEndDate(projectDto.getEndDate());
         project.setBudget(projectDto.getBudget());
         project.setTargetParticipant(projectDto.getTargetParticipant());
-        project.setPercentCompletion(projectDto.getPercentCompletion());
+        if ("completed".equalsIgnoreCase(projectDto.getStatus())) {
+            project.setPercentCompletion(100.0);
+        } else {
+            project.setPercentCompletion(projectDto.getPercentCompletion());
+        }
         project.setFundSource(projectDto.getFundSource());
         project.setDivision(divisionRepository.findById(projectDto.getDivisionId()).orElse(null));
         project.setStatus(projectDto.getStatus());
@@ -77,7 +81,11 @@ public class ProjectService {
         project.setImplementationSchedule(projectDto.getImplementationSchedule());
         project.setDateOfAccomplishment(projectDto.getDateOfAccomplishment());
         project.setBudget(projectDto.getBudget());
-        project.setPercentCompletion(projectDto.getPercentCompletion());
+        if ("completed".equalsIgnoreCase(projectDto.getStatus())) {
+            project.setPercentCompletion(100.0);
+        } else {
+            project.setPercentCompletion(projectDto.getPercentCompletion());
+        }
         project.setFundSource(projectDto.getFundSource());
         project.setTargetParticipant(projectDto.getTargetParticipant());
         project.setDivision(divisionRepository.findById(projectDto.getDivisionId()).orElse(null));
