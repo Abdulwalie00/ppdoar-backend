@@ -50,9 +50,11 @@ public class SecurityConfig {
                         // Allow preflight OPTIONS requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        // Only ADMINs can access user management endpoints
-                        .requestMatchers(HttpMethod.GET, "/api/manage-users/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/projects /**").hasRole("ADMIN")
+                        // Only SUPERADMINs can access user management endpoints
+                        .requestMatchers("/api/manage-users/**").hasRole("SUPERADMIN")
+
+                        // Only ADMINS and SUPERADMINS can access project endpoints
+                        .requestMatchers( "/api/projects/**").hasAnyRole("ADMIN", "SUPERADMIN")
 
 
                         // All other requests require authentication

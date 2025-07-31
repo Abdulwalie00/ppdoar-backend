@@ -33,6 +33,21 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // Create a default superadmin user if one doesn't exist
+        if (userRepository.findByUsername("superadmin").isEmpty()) {
+            User superAdminUser = new User();
+            superAdminUser.setFirstName("Super");
+            superAdminUser.setLastName("Admin");
+            superAdminUser.setEmail("superadmin@example.com");
+            superAdminUser.setUsername("superadmin");
+            superAdminUser.setPasswordHash(passwordEncoder.encode("password"));
+            superAdminUser.setRole("ROLE_SUPERADMIN");
+            superAdminUser.setCreatedAt(new Date());
+            superAdminUser.setUpdatedAt(new Date());
+            userRepository.save(superAdminUser);
+            System.out.println("Created superadmin user");
+        }
+
         // Create a default admin user if one doesn't exist
         if (userRepository.findByUsername("admin").isEmpty()) {
             User adminUser = new User();
@@ -78,7 +93,8 @@ public class DataLoader implements CommandLineRunner {
                 Map.entry("PLSO", "Provincial Legal Services Office"),
                 Map.entry("PSF", "Provincial Security Force"),
                 // Add your new entry here
-                Map.entry("PMO", "Project Management Office")
+                Map.entry("PMO", "Project Management Office"),
+                Map.entry("PPP", "Provincial Security Force")
         );
 
         for (Map.Entry<String, String> entry : divisions.entrySet()) {
@@ -98,6 +114,26 @@ public class DataLoader implements CommandLineRunner {
 
                 divisionRepository.save(division);
                 System.out.println("Created division: " + name);
+
+                // *** START: Added code to create a user for the new division ***
+                String username = code.toLowerCase() + "_user";
+                if (userRepository.findByUsername(username).isEmpty()) {
+                    User divisionUser = new User();
+                    divisionUser.setFirstName(name);
+                    divisionUser.setLastName("User");
+                    divisionUser.setEmail(code.toLowerCase() + "@example.com");
+                    divisionUser.setUsername(username);
+                    divisionUser.setPasswordHash(passwordEncoder.encode("password")); // Set a default password
+                    divisionUser.setRole("ROLE_USER"); // Set a default role
+                    divisionUser.setDivision(division); // Assign the new division
+                    divisionUser.setCreatedAt(new Date());
+                    divisionUser.setUpdatedAt(new Date());
+
+                    userRepository.save(divisionUser);
+                    System.out.println("Created user for division: " + name);
+                }
+                // *** END: Added code ***
+
 
                 // Create a sample project for the new division
                 Project sampleProject = new Project();
