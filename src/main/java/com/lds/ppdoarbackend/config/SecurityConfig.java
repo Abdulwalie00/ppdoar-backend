@@ -54,7 +54,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/manage-users/**").hasRole("SUPERADMIN")
 
                         // Only ADMINS and SUPERADMINS can access project endpoints
-                        .requestMatchers( "/api/projects/**").hasAnyRole("ADMIN", "SUPERADMIN")
+                        .requestMatchers( "/api/projects/**").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
 
 
                         // All other requests require authentication
