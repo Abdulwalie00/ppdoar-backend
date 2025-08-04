@@ -1,5 +1,6 @@
 package com.lds.ppdoarbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -36,4 +37,8 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL)
     private List<ProjectImage> images;
     private String status;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @JsonManagedReference // <-- ADD THIS ANNOTATION
+    private List<Comment> comments;
 }

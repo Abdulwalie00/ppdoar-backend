@@ -25,4 +25,5 @@ public class ProjectDto {
     private String officeInCharge;
     private String remarks;
     private List<ProjectImage> images;
+    private List<CommentDto> comments;
 }

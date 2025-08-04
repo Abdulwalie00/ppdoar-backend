@@ -56,6 +56,9 @@ public class SecurityConfig {
                         // Only ADMINS and SUPERADMINS can access project endpoints
                         .requestMatchers( "/api/projects/**").hasAnyRole("ADMIN", "SUPERADMIN", "USER")
 
+                        // Allow authenticated users to comment
+                        .requestMatchers("/api/projects/{projectId}/comments/**").authenticated()
+
 
                         // All other requests require authentication
                         .anyRequest().authenticated()
