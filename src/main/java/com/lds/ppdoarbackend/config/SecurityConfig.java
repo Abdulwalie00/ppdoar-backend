@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         // Allow public auth routes
+                        .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/files/**").permitAll()
                         .requestMatchers("/api/project-categories/**").permitAll()

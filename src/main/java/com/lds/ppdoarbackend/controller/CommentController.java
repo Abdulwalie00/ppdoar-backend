@@ -6,6 +6,7 @@ import com.lds.ppdoarbackend.dto.CommentDto;
 import com.lds.ppdoarbackend.model.Comment;
 import com.lds.ppdoarbackend.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate; // <-- INJECT THE TEMPLATE
+
     @GetMapping
     public List<Comment> getComments(@PathVariable String projectId, @AuthenticationPrincipal UserDetails userDetails) {
         return commentService.getCommentsForProject(projectId, userDetails);
@@ -26,10 +30,14 @@ public class CommentController {
 
     @PostMapping
     public Comment createComment(@PathVariable String projectId, @RequestBody CommentDto commentDto, @AuthenticationPrincipal UserDetails userDetails) {
-        // --- ADD THIS LINE FOR DEBUGGING ---
         System.out.println("Received comment content: '" + commentDto.getContent() + "'");
 
         commentDto.setProjectId(projectId);
-        return commentService.createComment(commentDto, userDetails);
+        Comment newComment = commentService.createComment(commentDto, userDetails);
+
+        // Broadcast the new comment to the topic
+        messagingTemplate.convertAndSend("/topic/comments/" + projectId, newComment);
+
+        return newComment;
     }
 }
