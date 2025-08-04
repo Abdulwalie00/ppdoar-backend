@@ -1,3 +1,5 @@
+// src/main/java/com/lds/ppdoarbackend/config/SecurityConfig.java
+
 package com.lds.ppdoarbackend.config;
 
 import com.lds.ppdoarbackend.security.JwtRequestFilter;
@@ -37,8 +39,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // *** ADD THIS LINE TO ALLOW WEBSOCKET CONNECTIONS ***
+                        .requestMatchers("/ws/**").permitAll()
                         // Allow public auth routes
                         .requestMatchers("/ws/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
