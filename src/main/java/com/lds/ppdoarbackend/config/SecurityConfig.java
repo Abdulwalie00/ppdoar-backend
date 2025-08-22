@@ -52,6 +52,9 @@ public class SecurityConfig {
                         // Allow users to access their own profile
                         .requestMatchers(HttpMethod.GET, "/api/users/username/**").authenticated()
 
+                        .requestMatchers(HttpMethod.GET, "/api/notifications/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/notifications/**").authenticated()
+
                         // Allow preflight OPTIONS requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
